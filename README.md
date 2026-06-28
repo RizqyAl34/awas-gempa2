@@ -347,11 +347,9 @@ app/src/main/
 
 ---
 
-## 👨‍💻 Tim
-
 | Nama | NIM | Role |
 |------|-----|------|
-| M. Rizqy Al Rasyd | 312410424 | Mobile Developer |
+| M. Rizqy Al Rasyd | 312410424 | Pemrograman Mobile |
 
 **Universitas Pelita Bangsa**
 Program Studi Teknik Informatika
@@ -370,10 +368,3 @@ Maps powered by OpenStreetMap contributors
 
 ---
 
-<div align="center">
-
-**Dibuat dengan ❤️ untuk keselamatan masyarakat Indonesia**
-
-*"Informasi yang cepat adalah pertahanan pertama dari bencana"*
-
-</div>
