@@ -368,3 +368,8 @@ Maps powered by OpenStreetMap contributors
 
 ---
 
+YouTube Link Presentasi : https://youtube.com/shorts/tUWdzgy8SWM
+---
+Clickup : https://app.clickup.com/90181810061/v/s/901810940611
+---
+
