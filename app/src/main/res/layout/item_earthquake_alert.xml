@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/item_earthquake_alert.xml -->
+<!-- Layout 1 item gempa di RecyclerView AlertsActivity -->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <!-- Magnitudo besar di kiri -->
+        <TextView
+            android:id="@+id/tv_item_magnitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_bold"
+            android:text="—"
+            android:textSize="44sp"
+            android:textColor="#AF101A" />
+
+        <!-- Konten kanan -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
+
+            <!-- Baris atas: Badge + Waktu -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Badge severity: KUAT / SEDANG / RINGAN -->
+                <TextView
+                    android:id="@+id/tv_item_severity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_tag_status1"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="2dp"
+                    android:text="SEDANG"
+                    android:textColor="#AF101A"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <!-- Waktu -->
+                <TextView
+                    android:id="@+id/tv_item_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="—"
+                    android:textSize="10sp"
+                    android:alpha="0.5" />
+            </RelativeLayout>
+
+            <!-- Lokasi -->
+            <TextView
+                android:id="@+id/tv_item_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_bold"
+                android:text="Memuat..."
+                android:textSize="16sp"
+                android:textColor="#1A1A1A"
+                android:layout_marginTop="4dp" />
+
+            <!-- Deskripsi: kedalaman + dirasakan -->
+            <TextView
+                android:id="@+id/tv_item_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="—"
+                android:textSize="12sp"
+                android:alpha="0.6"
+                android:layout_marginTop="4dp"
+                android:lineSpacingMultiplier="1.3" />
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

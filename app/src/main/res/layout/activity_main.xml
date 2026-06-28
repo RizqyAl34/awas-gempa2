@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF8F6">
+
+    <!-- ===================================================
+         HEADER FIXED
+         =================================================== -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:paddingHorizontal="24dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_bold"
+            android:text="AWAS GEMPA"
+            android:textColor="#AF101A"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- ===================================================
+         SCROLLABLE CONTENT
+         =================================================== -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav_container"
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- ============================================
+                 STATUS CARD (HIJAU = AMAN, MERAH = ALERT)
+                 ID: status_card → diupdate warna dari Java
+                 ============================================ -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/status_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#577857"
+                app:cardCornerRadius="32dp"
+                app:strokeWidth="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24dp">
+
+                    <!-- Tag "● SYSTEM STATUS" -->
+                    <TextView
+                        android:id="@+id/tag_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_tag_status1"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="● SYSTEM STATUS"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Judul Status: "Safe Status" atau "⚠ Alert!" -->
+                    <!-- ID: hero_title → sama persis dengan ID di Java lama -->
+                    <TextView
+                        android:id="@+id/hero_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="Memuat..."
+                        android:textColor="#FFFFFF"
+                        android:textSize="36sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tag_status" />
+
+                    <!-- Deskripsi Status -->
+                    <!-- ID BARU: tv_hero_description → diisi dari Java -->
+                    <TextView
+                        android:id="@+id/tv_hero_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Mengambil data dari BMKG..."
+                        android:textColor="#E0FFFFFF"
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toBottomOf="@id/hero_title" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ============================================
+                 STATS SECTION
+                 ============================================ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <!-- Global Activity Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="#FFE9E3"
+                    app:cardCornerRadius="24dp"
+                    app:strokeWidth="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:text="GLOBAL ACTIVITY"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <!-- ID BARU: tv_global_count → "12 Today" dst -->
+                        <TextView
+                            android:id="@+id/tv_global_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/manrope_bold"
+                            android:text="..."
+                            android:textSize="28sp" />
+
+                        <!-- ID BARU: tv_global_desc → keterangan -->
+                        <TextView
+                            android:id="@+id/tv_global_desc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.6"
+                            android:text="Memuat data BMKG..."
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Jakarta / Focal Point Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardBackgroundColor="#FFE2DA"
+                    app:cardCornerRadius="24dp"
+                    app:strokeWidth="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/manrope_bold"
+                            android:text="Jakarta"
+                            android:textSize="22sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CURRENT FOCAL POINT"
+                            android:textColor="#AF101A"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- ============================================
+                 RECENT ACTIVITY HEADER
+                 ============================================ -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="Gempa Terbaru"
+                android:textSize="22sp" />
+
+            <!-- ID BARU: tv_update_time → "Diperbarui pukul 14:23" -->
+            <TextView
+                android:id="@+id/tv_update_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.6"
+                android:text="Memuat..."
+                android:textSize="12sp" />
+
+            <!-- ============================================
+                 KARTU GEMPA TERBARU
+                 Semua TextView di dalam diisi dari Java.
+                 ============================================ -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/earthquake_card_example"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="24dp"
+                app:strokeWidth="0dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Baris atas: Magnitudo + Badge Severity -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Magnitudo: "M 5.2" -->
+                        <TextView
+                            android:id="@+id/tv_quake_magnitude"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/manrope_bold"
+                            android:text="M —"
+                            android:textSize="32sp"
+                            android:textColor="#1A1A1A" />
+
+                        <!-- Badge Severity: "SEDANG" / "KUAT" / "RINGAN" -->
+                        <TextView
+                            android:id="@+id/tv_severity_badge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp"
+                            android:text="..."
+                            android:textColor="#FFFFFF"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:background="@drawable/bg_severity_medium" />
+
+                    </LinearLayout>
+
+                    <!-- Lokasi Gempa -->
+                    <TextView
+                        android:id="@+id/tv_quake_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Memuat lokasi..."
+                        android:textSize="14sp"
+                        android:textColor="#333333" />
+
+                    <!-- Kedalaman -->
+                    <TextView
+                        android:id="@+id/tv_quake_depth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Kedalaman: —"
+                        android:textSize="12sp"
+                        android:alpha="0.6" />
+
+                    <!-- Divider tipis -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="#F0F0F0" />
+
+                    <!-- Baris bawah: Waktu + Potensi Tsunami -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_quake_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="— · —"
+                            android:textSize="12sp"
+                            android:textColor="#666666" />
+
+                        <TextView
+                            android:id="@+id/tv_quake_potential"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="—"
+                            android:textSize="11sp"
+                            android:textColor="#AF101A"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- ============================================================
+     PASTE INI ke activity_main.xml
+     Letaknya: SETELAH kartu earthquake_card_example,
+               SEBELUM kartu merah "Prepare for Unexpected"
+     ============================================================ -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_alert_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:cardCornerRadius="28dp"
+                app:cardBackgroundColor="#C62828"
+                app:strokeWidth="0dp"
+                app:cardElevation="6dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24dp">
+
+                    <!-- Segitiga peringatan transparan di pojok kanan -->
+                    <TextView
+                        android:id="@+id/iv_alert_triangle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚠"
+                        android:textSize="80sp"
+                        android:alpha="0.15"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Tag: "● CRITICAL ALERT" atau "● ACTIVE ALERT" -->
+                    <TextView
+                        android:id="@+id/tv_alert_tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="● CRITICAL ALERT"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="5dp"
+                        android:background="@drawable/bg_alert_tag"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Judul: "EARTHQUAKE DETECTED" atau "Prepare for Impact" -->
+                    <TextView
+                        android:id="@+id/tv_alert_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="80dp"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="EARTHQUAKE\nDETECTED"
+                        android:textColor="#FFFFFF"
+                        android:textSize="30sp"
+                        android:lineSpacingMultiplier="1.1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_alert_tag"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- Sub-judul: hanya muncul saat KUAT -->
+                    <TextView
+                        android:id="@+id/tv_alert_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="✦ EVACUATE IMMEDIATELY"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_alert_title" />
+
+                    <!-- Deskripsi -->
+                    <TextView
+                        android:id="@+id/tv_alert_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textColor="#FFEEEE"
+                        android:textSize="14sp"
+                        android:lineSpacingMultiplier="1.4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_alert_subtitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- ============================================
+                 CTA CARD: PREPARE FOR UNEXPECTED
+                 ============================================ -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:cardBackgroundColor="#D32F2F"
+                app:cardCornerRadius="32dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_bold"
+                        android:gravity="center"
+                        android:text="Siapkan Diri\nUntuk yang Tak Terduga"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="Pelajari teknik 'Jongkok, Lindungi, dan Bertahan' sekarang."
+                        android:textColor="#E0FFFFFF"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="MULAI PANDUAN"
+                        android:textColor="#D32F2F"
+                        app:backgroundTint="#FFFFFF"
+                        app:cornerRadius="20dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="24dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/emergency_kit_image" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Extra space -->
+            <View android:layout_width="match_parent" android:layout_height="100dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ===================================================
+         FLOATING BOTTOM NAV
+         =================================================== -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_nav_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/bg_bottom_nav"
+            android:elevation="8dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/nav_chatbot"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                android:src="@drawable/robot" />
+
+            <ImageView
+                android:id="@+id/nav_home"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/bg_nav_active"
+                android:padding="12dp"
+                android:src="@drawable/grid"
+                app:tint="@android:color/white" />
+
+            <ImageView
+                android:id="@+id/nav_maps"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                android:src="@drawable/explore" />
+
+            <ImageView
+                android:id="@+id/nav_alerts"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:padding="12dp"
+                android:src="@drawable/notifications" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF8F6">
+
+    <!-- =====================================================
+         HEADER SECTION
+         ===================================================== -->
+    <LinearLayout
+        android:id="@+id/header_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AWAS GEMPA"
+            android:textColor="#AF101A"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RIWAYAT GEMPA"
+            android:textColor="#5B403D"
+            android:textSize="10sp"
+            android:layout_marginTop="24dp"
+            android:alpha="0.6"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_bold"
+            android:text="Aktivitas Terkini"
+            android:textColor="#2D1A18"
+            android:textSize="32sp" />
+
+        <!-- Status update time -->
+        <!-- ID: tv_alerts_update_time → diupdate dari Java -->
+        <TextView
+            android:id="@+id/tv_alerts_update_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Memuat data BMKG..."
+            android:textColor="#5B403D"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:alpha="0.7" />
+
+        <!-- Ringkasan: berapa gempa hari ini -->
+        <!-- ID: tv_alerts_summary -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="#FFE9E3"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_total_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="..."
+                        android:textSize="28sp"
+                        android:textColor="#1A1A1A" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gempa terkini (data BMKG)"
+                        android:textSize="12sp"
+                        android:alpha="0.6" />
+                </LinearLayout>
+
+                <!-- Badge gempa kuat -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_strong_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="..."
+                        android:textSize="22sp"
+                        android:textColor="#C62828" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="KUAT (M≥6)"
+                        android:textSize="10sp"
+                        android:textColor="#C62828"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <!-- =====================================================
+         LOADING INDICATOR (tersembunyi setelah data masuk)
+         ===================================================== -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/header_section"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- =====================================================
+         RECYCLERVIEW: LIST GEMPA DARI BMKG
+         ===================================================== -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_alerts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="16dp"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/header_section"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav" />
+
+    <!-- =====================================================
+         BOTTOM NAV
+         ===================================================== -->
+    <LinearLayout
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/bg_bottom_nav"
+        android:elevation="12dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/nav_chatbot"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@drawable/robot" />
+
+        <ImageView
+            android:id="@+id/nav_home"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="20dp"
+            android:padding="12dp"
+            android:src="@drawable/grid" />
+
+        <ImageView
+            android:id="@+id/nav_maps"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@drawable/explore" />
+
+        <ImageView
+            android:id="@+id/nav_alerts"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/bg_nav_active"
+            android:padding="12dp"
+            android:src="@drawable/notifications"
+            app:tint="@android:color/white" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

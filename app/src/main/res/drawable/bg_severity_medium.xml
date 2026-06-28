@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/bg_severity_medium.xml -->
+<!-- Mirip desain "Sedang.png" — oranye #E64A19 dengan sudut rounded -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#E64A19" />
+    <corners android:radius="16dp" />
+</shape>

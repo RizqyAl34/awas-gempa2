@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#AF101A</color>
+    <color name="surface">#FFF8F6</color>
+    <color name="surface_container_lowest">#FFFFFF</color>
+    <color name="surface_container_low">#FFF1ED</color>
+    <color name="surface_container_high">#FFE2DA</color>
+    <color name="on_surface_variant">#5B403D</color>
+    <color name="tertiary">#405F40</color>
+    <color name="status_safe">#577857</color>   <!-- Hijau -->
+    <color name="status_alert">#AF101A</color>  <!-- Merah -->
+    <color name="alert_kuat">#C62828</color>
+    <color name="alert_sedang">#E64A19</color>
+
+</resources>
